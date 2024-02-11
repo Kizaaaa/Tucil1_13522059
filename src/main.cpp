@@ -4,6 +4,15 @@
 #include <string>
 using namespace std;
 
+char alphaNumeric[36] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
+string TokenGenerator(){
+    string s = "";
+    s += alphaNumeric[rand() % 36];
+    s += alphaNumeric[rand() % 36];
+    return s;
+}
+
 long long int bufferSize,matrixWidth,matrixHeight,numberOfSequence;
 
 int main(){
@@ -29,10 +38,9 @@ int main(){
     int input = stoi(userInput);
 
     if(input == 1){
-        cout << "\nMetode input txt telah dipilih.\nMasukkan nama file yang ingin dipakai(tanpa .txt): ";
+        cout << "\nMetode input txt telah dipilih.\nMasukkan nama file txt yang ingin dipakai (pastikan sudah ada dalam folder test): ";
         string path;
         cin >> path;
-        path.append(".txt");
         path.insert(0,"../test/");
 
         fstream file;
