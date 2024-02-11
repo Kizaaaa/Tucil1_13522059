@@ -2,18 +2,15 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 using namespace std;
 
-char alphaNumeric[36] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+typedef struct{
+    vector<string> str;
+    long long int point;
+} SEQUENCE;
 
-string TokenGenerator(){
-    string s = "";
-    s += alphaNumeric[rand() % 36];
-    s += alphaNumeric[rand() % 36];
-    return s;
-}
-
-long long int bufferSize,matrixWidth,matrixHeight,numberOfSequence;
+long long int tokenSize, bufferSize, matrixWidth, matrixHeight, numberOfSequence, maxSequence, i, j, k, ans = 0;
 
 int main(){
     cout << "Selamat datang di \n";
@@ -61,12 +58,67 @@ int main(){
             cout << "Matrix Width : " << matrixWidth << endl;
             cout << "Matrix Height : " << matrixHeight << endl;
 
+            string matrix[matrixHeight][matrixWidth];
+
+            for(i=0;i<matrixHeight;i++){
+                getline(file,line);
+                for(j=0;j<matrixWidth;j++){
+                    matrix[i][j] = line.substr(3*j,2);
+                    cout << matrix[i][j] << " ";
+                }
+                cout << endl;
+            }
+
+            getline(file,line);
+            numberOfSequence = stoi(line);
+            cout << "Number of sequence : " << numberOfSequence << endl;
+            SEQUENCE seq[numberOfSequence];
+            for(i=0;i<numberOfSequence;i++){
+                getline(file,line);
+                temp = line.length() + 1;
+                temp /= 3;
+                for(j=0;j<temp;j++){
+                    string temps = line.substr(3*j,2);
+                    seq[i].str.push_back(temps);
+                    cout << seq[i].str[j] << endl;
+                }
+                getline(file,line);
+                seq[i].point = stoi(line);
+                cout << "point : " << seq[i].point << endl;
+            }
+
             file.close();
         } else {
             cout << "\nFile txt tidak ditemukan pada folder test, pastikan penulisan sudah benar!\n";
         }
     } else {
-        cout << "random";
+        cout << "Masukkan jumlah token unik : ";
+        cin >> tokenSize;
+        string token[tokenSize];
+
+        cout << "Masukkan token unik(dipisahkan dengan spasi): ";
+        cin.ignore();
+        getline(cin,userInput);
+        for(i=0;i<tokenSize;i++){
+            token[i] = userInput.substr(3*i,2);
+        }
+
+        cout << "Masukkan ukuran buffer : ";
+        cin >> bufferSize;
+
+        cout << "Masukkan ukuran matrix(Lebar Panjang) : ";
+        cin.ignore();
+        getline(cin,userInput);
+        int temp = userInput.length();
+        size_t found = userInput.find(" ");
+        matrixWidth = stoi(userInput.substr(0,found));
+        matrixHeight = stoi(userInput.substr(found+1,temp-found));
+
+        cout << "Masukkan jumlah sekuens : ";
+        cin >> numberOfSequence;
+
+        cout << "Masukkan ukuran maksimal sekuens : ";
+        cin >> maxSequence;
     }
 
     return 0;
