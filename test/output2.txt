@@ -1,0 +1,8 @@
+Reward : 107
+Path : Z1 7J C4 
+Coordinate :
+5, 1
+5, 4
+6, 4
+
+Time taken : 4 ms

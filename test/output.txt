@@ -1,0 +1,12 @@
+Reward : 66
+Path : E9 55 2L 7A 7A 55 55 
+Coordinate :
+11, 1
+11, 2
+9, 2
+9, 4
+11, 4
+11, 7
+3, 7
+
+Time taken : 21192 ms
